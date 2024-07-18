@@ -10,18 +10,18 @@
             padding: 0;  
             height: 100%;  
             font-family: 'Montserrat', sans-serif;  
-              background-color: #21213b; 
+            background-color: #21213b;  
             display: flex;  
             justify-content: center;  
             align-items: center;  
+            overflow: hidden; /* Prevent scroll bars */  
         }  
         .container {  
             text-align: center;  
         }  
         h1 {  
             font-size: 15vw;  
-    color: #353563; /* Hide text color */
-
+            color: #353563; /* Hide text color */  
             text-transform: uppercase;  
             margin: 0;  
             padding: 0;  
@@ -42,15 +42,16 @@
     </div>  
 
 <script>  
-        let words = ['DESIGNER', 'THINKER', 'EDITOR', 'MANAGER', 'TEAM PLAYER', 'FREELANCER', 'ARTIST','GAMER','ADVENTURER','ILLUSTRATOR'];  
+        let words = ['DESIGNER', 'THINKER', 'EDITOR', 'MANAGER', 'TEAM PLAYER', 'FREELANCER', 'ARTIST', 'GAMER', 'ADVENTURER', 'ILLUSTRATOR'];  
         let wordIndex = 0;  
         let charIndex = 0;  
         let isDeleting = false;  
         const typingSpeed = 150;  
         const deletingSpeed = 100;  
+        const minPause = 200; // Minimum pause duration  
+        const maxPause = 1000; // Maximum pause duration  
         const pauseBetweenWords = 1800;  
 
-        // Fisher-Yates shuffle algorithm  
         function shuffleArray(array) {  
             for (let i = array.length - 1; i > 0; i--) {  
                 const j = Math.floor(Math.random() * (i + 1));  
@@ -58,7 +59,6 @@
             }  
         }  
 
-        // Shuffle the words array before starting  
         shuffleArray(words);  
 
         function getRandomDelay(min, max) {  
@@ -88,7 +88,7 @@
                 delay = typingSpeed;  
             } else if (!isDeleting) {  
                 if (Math.random() < 0.1) {  
-                    delay = getRandomDelay(200, 1000);  
+                    delay = getRandomDelay(minPause, maxPause);  
                 } else {  
                     delay = getRandomDelay(typingSpeed - 50, typingSpeed + 50);  
                 }  
