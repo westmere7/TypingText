@@ -41,14 +41,25 @@
         <h1 id="typeText"></h1>  
     </div>  
 
- <script>  
-        const words = ['DESIGNS', 'CREATIVE', 'BRANDS', 'VISUAL', 'TYPO', 'STYLE', 'CONCEPTS'];  
+<script>  
+        let words = ['DESIGNER', 'THINKER', 'EDITOR', 'MANAGER', 'TEAM PLAYER', 'FREELANCER', 'ARTIST','GAMER','ADVENTURER','ILLUSTRATOR'];  
         let wordIndex = 0;  
         let charIndex = 0;  
         let isDeleting = false;  
         const typingSpeed = 150;  
         const deletingSpeed = 100;  
         const pauseBetweenWords = 1800;  
+
+        // Fisher-Yates shuffle algorithm  
+        function shuffleArray(array) {  
+            for (let i = array.length - 1; i > 0; i--) {  
+                const j = Math.floor(Math.random() * (i + 1));  
+                [array[i], array[j]] = [array[j], array[i]];  
+            }  
+        }  
+
+        // Shuffle the words array before starting  
+        shuffleArray(words);  
 
         function getRandomDelay(min, max) {  
             return Math.floor(Math.random() * (max - min + 1)) + min;  
@@ -76,11 +87,10 @@
                 wordIndex = (wordIndex + 1) % words.length;  
                 delay = typingSpeed;  
             } else if (!isDeleting) {  
-                // Add random pauses during typing  
-                if (Math.random() < 0.1) { // 10% chance of a pause  
-                    delay = getRandomDelay(200, 1000); // Random pause between 200ms and 1000ms  
+                if (Math.random() < 0.1) {  
+                    delay = getRandomDelay(200, 1000);  
                 } else {  
-                    delay = getRandomDelay(typingSpeed - 50, typingSpeed + 50); // Slight variation in typing speed  
+                    delay = getRandomDelay(typingSpeed - 50, typingSpeed + 50);  
                 }  
             } else {  
                 delay = deletingSpeed;  
