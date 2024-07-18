@@ -1,0 +1,80 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>DESIGNS</title>  
+    <style>  
+        body, html {  
+            margin: 0;  
+            padding: 0;  
+            height: 100%;  
+            font-family: Arial, sans-serif;  
+            background-color: #1a1f2e;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+        }  
+        .container {  
+            text-align: center;  
+        }  
+        h1 {  
+            font-size: 15vw;  
+            color: #8088c9;  
+            text-transform: uppercase;  
+            letter-spacing: 0.1em;  
+            margin: 0;  
+            padding: 0;  
+            white-space: nowrap;  
+            overflow: hidden;  
+            border-right: 0.15em solid #8088c9;  
+            animation: blink-caret 0.75s step-end infinite;  
+        }  
+        @keyframes blink-caret {  
+            from, to { border-color: transparent }  
+            50% { border-color: #8088c9 }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="container">  
+        <h1 id="typeText"></h1>  
+    </div>  
+
+    <script>  
+        const words = ['DESIGNS', 'CREATIVE', 'INNOVATIVE', 'INSPIRING', 'VISIONARY'];  
+        let wordIndex = 0;  
+        let charIndex = 0;  
+        let isDeleting = false;  
+        const typingSpeed = 150;  
+        const deletingSpeed = 100;  
+        const pauseBetweenWords = 1000;  
+
+        function typeEffect() {  
+            const currentWord = words[wordIndex];  
+            const text = document.getElementById('typeText');  
+
+            if (isDeleting) {  
+                text.innerText = currentWord.substring(0, charIndex - 1);  
+                charIndex--;  
+            } else {  
+                text.innerText = currentWord.substring(0, charIndex + 1);  
+                charIndex++;  
+            }  
+
+            if (!isDeleting && charIndex === currentWord.length) {  
+                isDeleting = true;  
+                setTimeout(typeEffect, pauseBetweenWords);  
+            } else if (isDeleting && charIndex === 0) {  
+                isDeleting = false;  
+                wordIndex = (wordIndex + 1) % words.length;  
+                setTimeout(typeEffect, typingSpeed);  
+            } else {  
+                setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);  
+            }  
+        }  
+
+        typeEffect();  
+    </script>  
+</body>  
+</html>
