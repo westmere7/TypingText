@@ -41,14 +41,18 @@
         <h1 id="typeText"></h1>  
     </div>  
 
-    <script>  
+ <script>  
         const words = ['DESIGNS', 'CREATIVE', 'BRANDS', 'KEY VISUAL', 'GUIDELINES', 'STYLE', 'CONCEPTS'];  
         let wordIndex = 0;  
         let charIndex = 0;  
         let isDeleting = false;  
         const typingSpeed = 150;  
         const deletingSpeed = 100;  
-        const pauseBetweenWords = 1000;  
+        const pauseBetweenWords = 1800;  
+
+        function getRandomDelay(min, max) {  
+            return Math.floor(Math.random() * (max - min + 1)) + min;  
+        }  
 
         function typeEffect() {  
             const currentWord = words[wordIndex];  
@@ -62,19 +66,30 @@
                 charIndex++;  
             }  
 
+            let delay;  
+
             if (!isDeleting && charIndex === currentWord.length) {  
                 isDeleting = true;  
-                setTimeout(typeEffect, pauseBetweenWords);  
+                delay = pauseBetweenWords;  
             } else if (isDeleting && charIndex === 0) {  
                 isDeleting = false;  
                 wordIndex = (wordIndex + 1) % words.length;  
-                setTimeout(typeEffect, typingSpeed);  
+                delay = typingSpeed;  
+            } else if (!isDeleting) {  
+                // Add random pauses during typing  
+                if (Math.random() < 0.1) { // 10% chance of a pause  
+                    delay = getRandomDelay(200, 1000); // Random pause between 200ms and 1000ms  
+                } else {  
+                    delay = getRandomDelay(typingSpeed - 50, typingSpeed + 50); // Slight variation in typing speed  
+                }  
             } else {  
-                setTimeout(typeEffect, isDeleting ? deletingSpeed : typingSpeed);  
+                delay = deletingSpeed;  
             }  
+
+            setTimeout(typeEffect, delay);  
         }  
 
         typeEffect();  
     </script>  
 </body>  
-</html>
+</html>  
