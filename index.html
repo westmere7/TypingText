@@ -9,8 +9,8 @@
             margin: 0;  
             padding: 0;  
             height: 100%;  
-            font-family: Arial, sans-serif;  
-            background-color: #1a1f2e;  
+            font-family: 'Montserrat', sans-serif;  
+              background-color: #21213b; 
             display: flex;  
             justify-content: center;  
             align-items: center;  
@@ -20,14 +20,16 @@
         }  
         h1 {  
             font-size: 15vw;  
-            color: #8088c9;  
+    color: transparent; /* Hide text color */
+    background: linear-gradient(to bottom, #2a2a4f, #21213b); /* Text gradient */
+    -webkit-background-clip: text; /* Clip text to background */
+    -webkit-text-fill-color: transparent; /* Make text transparent */
             text-transform: uppercase;  
-            letter-spacing: 0.1em;  
             margin: 0;  
             padding: 0;  
             white-space: nowrap;  
             overflow: hidden;  
-            border-right: 0.15em solid #8088c9;  
+            border-right: 0.05em solid #8088c9; /* Changed from 0.15em to 0.05em */  
             animation: blink-caret 0.75s step-end infinite;  
         }  
         @keyframes blink-caret {  
@@ -42,7 +44,7 @@
     </div>  
 
  <script>  
-        const words = ['DESIGNS', 'CREATIVE', 'BRANDS', 'KEY VISUAL', 'GUIDELINES', 'STYLE', 'CONCEPTS'];  
+        const words = ['DESIGNS', 'CREATIVE', 'BRANDS', 'VISUAL', 'TYPO', 'STYLE', 'CONCEPTS'];  
         let wordIndex = 0;  
         let charIndex = 0;  
         let isDeleting = false;  
